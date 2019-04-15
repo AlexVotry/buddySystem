@@ -1,9 +1,52 @@
-import React from 'react';
 
-const Header = () => {
-  return (
-    <div data-test="header-component">Header</div>
-  );
-};
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-export default Header;
+class Header extends Component {
+  // this.props.auth is the result from the authReducer
+  renderContent() {
+    console.log('auth: ', this.props.auth);
+    
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <div className = "collapse navbar-collapse mr-md-3" id = "navbarSupportedContent">
+            <a href="/auth/google" className="navbar-text">Login With Google</a>
+          </div>
+        );
+      default:
+        return [
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li key="postEvent">Post Event   </li>
+              <li key="listCat">List by Category   </li>
+              <li key="listDate">List by Date   </li>
+              <li key="listLoc">List by location</li>
+            </ul>
+            <a href="/api/logout" className=".mr-md-3 navbar-text">Logout</a>
+          </div>
+        ]
+    }
+  }
+
+  render() {
+    return (
+      <nav className="navbar navbar-expand-lg navbar-light bg-primary" data-test="header-component">
+        <Link to={"/"} className="navbar-brand" >BudySystem</Link>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        { this.renderContent()}
+      </nav>
+    );
+  }
+}
+
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Header);
