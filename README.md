@@ -1,4 +1,4 @@
-### This is not a dating app.
+### This is not a dating app or even a friend finder.
 
 This app is designed to allow people who want to go to an event or just do somethiing, find someone or some people to do it with.  The idea is to allow a user to post an event and how many people they'd like to join them, and let other members decide if they want to join.
 
