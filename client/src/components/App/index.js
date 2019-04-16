@@ -4,6 +4,10 @@ import { connect } from 'react-redux'; // make react work with redux
 import { fetchUser } from '../../actions';
 import Header from '../Header';
 import Home from '../Home';
+import PostEvents from '../PostEvents';
+import ListByCat from '../ListByCat';
+import ListByDate from '../ListByDate';
+import ListByLocation from '../ListByLocation';
 import './App.css';
 
 class App extends Component {
@@ -18,6 +22,10 @@ class App extends Component {
           <div>
             <Header className="App-header" />
             <Route exact path="/" component={Home} />
+            <Route exact path="/post" component={PostEvents} />
+            <Route exact path="/category" component={ListByCat} />
+            <Route exact path="/date" component={ListByDate} />
+            <Route exact path="/location" component={ListByLocation} />
           </div>
         </BrowserRouter>
       </div>

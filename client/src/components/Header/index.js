@@ -19,12 +19,12 @@ class Header extends Component {
         );
       default:
         return [
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div key="collapse" className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li key="postEvent">Post Event   </li>
-              <li key="listCat">List by Category   </li>
-              <li key="listDate">List by Date   </li>
-              <li key="listLoc">List by location</li>
+              <li className="item" key="postEvent"><Link to={'/post'}>Post Event</Link></li>
+              <li className="item" key="listCat"><Link to={'/category'}>List by Category</Link></li>
+              <li className="item" key="listDate"><Link to={'/date'}>List by Date</Link></li>
+              <li className="item" key="listLoc"><Link to={'/location'}>List by location</Link></li>
             </ul>
             <a href="/api/logout" className=".mr-md-3 navbar-text">Logout</a>
           </div>
@@ -34,7 +34,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-primary" data-test="header-component">
+      <nav className="navbar navbar-expand-lg navbar-light" data-test="header-component">
         <Link to={"/"} className="navbar-brand" >BudySystem</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

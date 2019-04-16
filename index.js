@@ -5,10 +5,18 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 const expTime = 30 * 24 * 60 * 60 * 1000; // 30 days
-require('./models/User');
+const User = require('./models/User');
+// const userSeed = require('./seeds/users');
 require('./services/passport');
 
 mongooose.connect(keys.mongoURI, { useNewUrlParser: true });
+
+// User.insertMany(userSeed)
+//   .then(dbUsers => {
+//     console.log("users:", dbUsers)
+//   })
+//   .catch(err => console.log(err.message));
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();

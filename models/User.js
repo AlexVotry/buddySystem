@@ -11,9 +11,12 @@ const userSchema = new Schema({
   city: String,
   state: String,
   country: String,
+  lat: Number,
+  long: Number,
   activities: [String],
   age: Number,
-  gender: String
+  gender: String,
+  friends: [String]
 });
 
 mongoose.model('users', userSchema);
