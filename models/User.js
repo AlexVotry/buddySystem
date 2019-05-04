@@ -3,6 +3,8 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   googleId: String,
+  name: String,
+  gmail: String,
   userName: String,
   image: String,
   email: String,
@@ -10,7 +12,6 @@ const userSchema = new Schema({
   streetAddress: String,
   city: String,
   state: String,
-  country: String,
   lat: Number,
   long: Number,
   activities: [String],
@@ -19,4 +20,4 @@ const userSchema = new Schema({
   friends: [String]
 });
 
-mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', userSchema);
