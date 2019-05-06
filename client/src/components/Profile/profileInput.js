@@ -5,12 +5,14 @@ export default ({ input, label, meta: { error, touched } }) => {
   // {...input} == all the properties on input object
   // {touched && error} == if (touched && error) { error }
   return (
-    <div>
+    <React.Fragment>
       <label>{label}</label>
-      <input {...input} type="text" style={{ marginBottom: '5px' }} />
+      <input {...input} className="form-control" type="text" style={{ marginBottom: '5px' }} />
+      <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
       <div className="red-text" style={{ marginBottom: '20px' }}>
         {touched && error}
       </div>
-    </div>
+    </React.Fragment>
   )
 }
+

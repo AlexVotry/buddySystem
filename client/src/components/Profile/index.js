@@ -14,29 +14,34 @@ import UploadImage from './UploadImage';
 class Profile extends Component {
 
   renderField(field, input) {
+    // if (this.props.profile) {
+    //   console.log('input:', this.props.profile['age'])
+    // }
     return _.map(fields[input], ({ label, name }) => {
       return (
-        <Field key={name} component={field} label={label} name={name}/>
+        <Field className="field" key={name} component={field} label={label} name={name}/>
       );
     });
   };
 
   onSubmit = (formValues, history) => {
-    formValues.image = this.props.image;
+    formValues.image = this.props.image.id;
+    console.log('formValues', formValues);
     this.props.submitProfile(formValues, history);
   }
 
   render() {
-    console.log('state: ', this.state);
+    // console.log('state: ', this.props);
+    // console.log('profile: ', this.props.auth);
     const { handleSubmit } = this.props;
     return (
       <div>
         <UploadImage />
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
           {this.renderField(profileInput, 'text')}
           {this.renderField(profileOptions, 'select')}
-          <Link to="/" className="red btn">Cancel</Link>
-          <button className="teal btn" type="submit">Submit</button>
+          <Link to="/" className="btn btn-danger">Cancel</Link>
+          <button className="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
     )
@@ -44,7 +49,7 @@ class Profile extends Component {
 }
 
 function validate(values) {
-  console.log('validate:', values);
+  // console.log('validate:', values);
   
   const errors = {};
 
@@ -59,8 +64,8 @@ function validate(values) {
   return errors;
 }
 
-const mapStateToProps =({ image }) => {
-  return { image };
+const mapStateToProps = state => {
+  return { image: state.image, profile: state.auth };
 }
 
 Profile = connect(mapStateToProps, {submitProfile})(withRouter(Profile));
