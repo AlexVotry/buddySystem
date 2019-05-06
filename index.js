@@ -27,7 +27,7 @@ app.use(
 //   cloud_name: 'aleximages',
 //   api_key: keys.CLOUD_API_KEY,
 //   api_secret: keys.CLOUD_API_SECRET
-// });
+// });7
 
 // cloudinary.uploader.upload("my_picture.jpg", (error, result) => console.log(result));
 
