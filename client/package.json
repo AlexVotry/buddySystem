@@ -13,7 +13,12 @@
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-form": "^8.2.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "ajv": "^6.10.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "http-proxy-middleware": "^0.19.1",
+    "jest-enzyme": "^7.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,12 +34,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "ajv": "^6.10.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "http-proxy-middleware": "^0.19.1",
-    "jest-enzyme": "^7.0.2"
-  }
+  ]
 }
