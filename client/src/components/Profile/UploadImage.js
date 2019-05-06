@@ -22,7 +22,7 @@ class UploadImage extends React.Component {
   render() {
     return (
       <div className="upload">
-        <button onClick={this.uploadWidget} className="upload-button">
+        <button onClick={this.uploadWidget} className="btn btn-outline-secondary">
           Add a picture of Yourself
         </button>
       </div>
