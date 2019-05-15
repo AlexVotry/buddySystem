@@ -1,61 +1,73 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { map, each }from 'lodash';
+import { Link, Redirect } from 'react-router-dom';
 import validateEmails from '../../utils/validateEmail';
-import profileInput from './profileInput';
-import profileOptions from './profileOptions';
+import profileInput from '../Forms/profileInput';
+import profileOptions from '../Forms/profileOptions';
 import { fields } from './formFields';
 import { submitProfile } from '../../actions';
-import UploadImage from './UploadImage';
+import UploadImage from '../Forms/UploadImage';
+import { activities } from '../Forms/checkboxInfo';
+
 
 class Profile extends Component {
+  state = { redirect: false };
 
   renderField(field, input) {
-    // if (this.props.profile) {
-    //   console.log('input:', this.props.profile['age'])
-    // }
-    return _.map(fields[input], ({ label, name }) => {
+    return map(fields[input], ({ label, name, subscript }) => {
       return (
-        <Field className="field" key={name} component={field} label={label} name={name}/>
+        <Field 
+          className="field" 
+          key={name} component={field} 
+          label={label} 
+          name={name} 
+          checkBoxes={activities}
+          subscript={subscript}
+        />
       );
     });
   };
 
-  onSubmit = (formValues, history) => {
+  setRedirect = () => {
+    this.setState({ redirect: true });
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
+  }
+
+  onSubmit = (formValues) => {
     formValues.image = this.props.image.id;
-    console.log('formValues', formValues);
-    this.props.submitProfile(formValues, history);
+    this.props.submitProfile(formValues);
+    this.setRedirect();
   }
 
   render() {
-    // console.log('state: ', this.props);
-    // console.log('profile: ', this.props.auth);
     const { handleSubmit } = this.props;
     return (
-      <div>
+      <React.Fragment>
         <UploadImage />
+        {this.renderRedirect()}
         <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
           {this.renderField(profileInput, 'text')}
           {this.renderField(profileOptions, 'select')}
           <Link to="/" className="btn btn-danger">Cancel</Link>
           <button className="btn btn-primary" type="submit">Submit</button>
         </form>
-      </div>
+      </React.Fragment>
     )
   }
 }
 
 function validate(values) {
-  // console.log('validate:', values);
-  
   const errors = {};
 
   errors.recipients = validateEmails(values.recipients || '');
 
-  _.each(fields, ({ name }) => {
+  each(fields, ({ name }) => {
     if (!values[name]) {
       errors[name] = `You must provide a ${name}`;
     }
@@ -68,7 +80,7 @@ const mapStateToProps = state => {
   return { image: state.image, profile: state.auth };
 }
 
-Profile = connect(mapStateToProps, {submitProfile})(withRouter(Profile));
+Profile = connect(mapStateToProps, {submitProfile})(Profile);
 
 export default reduxForm({
   validate,

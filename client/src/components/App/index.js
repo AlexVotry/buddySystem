@@ -9,6 +9,10 @@ import ListByCat from '../ListByCat';
 import ListByDate from '../ListByDate';
 import ListByLocation from '../ListByLocation';
 import Profile from '../Profile';
+import Errors from '../Errors';
+import PostGroups from '../PostGroups';
+import Event from '../Event';
+import EventDetail from '../EventDetail';
 import './App.css';
 
 class App extends Component {
@@ -23,11 +27,15 @@ class App extends Component {
           <div>
             <Header className="App-header" />
             <Route exact path="/" component={Home} />
-            <Route exact path="/post" component={PostEvents} />
+            <Route exact path="/postEvent" component={PostEvents} />
             <Route exact path="/category" component={ListByCat} />
             <Route exact path="/date" component={ListByDate} />
             <Route exact path="/location" component={ListByLocation} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/postGroups" component={PostGroups} />
+            <Route exact path="/error" component={Errors} />
+            <Route exact path="/event" component={Event} />
+            <Route exact path="/detail/:id" component={EventDetail} />
           </div>
         </BrowserRouter>
       </div>
