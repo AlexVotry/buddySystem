@@ -8,9 +8,35 @@ import profileOptions from '../Forms/profileOptions';
 import { fields } from './formFields';
 import { submitGroup } from '../../actions';
 import { gender } from '../Forms/checkboxInfo';
+import axios from 'axios';
 
 class PostGroups extends React.Component {
-  state = { redirect: false };
+  state = { redirect: false, joined: false, eventId: window.localStorage.getItem('eventId') };
+  
+
+  componentDidMount() {
+    
+    this.checkIfBelongToGroup();
+  }
+
+  checkIfBelongToGroup = async () => {
+    const res = await axios.get(`/api/checkForGroup/${this.state.eventId}`);
+    this.setState({joined: res.data})
+  }
+  
+  renderForm() {
+    // this.setState({ joined: this.checkIfBelongToGroup(eventId) });
+    if (this.state.joined) return null;
+    const { handleSubmit } = this.props;
+    return (
+      <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
+        {this.renderField(profileInput, 'text')}
+        {this.renderField(profileOptions, 'select')}
+        <Link to="/" className="btn btn-danger">Cancel</Link>
+        <button className="btn btn-primary" type="submit">Submit</button>
+      </form>
+    )
+  }
   
   renderField(field, input) {
     return map(fields[input], ({ label, name, subscript }) => {
@@ -33,28 +59,22 @@ class PostGroups extends React.Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to={`/detail/${this.props.eventId}`} />
+      return <Redirect to={`/detail/${this.state.eventId}`} />
     }
   }
 
   onSubmit = (formValues) => {
     formValues.users = [this.props.user._id];
-    formValues.event = this.props.eventId;
+    formValues.event = this.state.eventId;
     this.props.submitGroup(formValues, this.props.user._id);
     this.setRedirect();
   }
 
   render() {
-    const { handleSubmit } = this.props;
     return (
       <React.Fragment>
         {this.renderRedirect()}
-        <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
-          {this.renderField(profileInput, 'text')}
-          {this.renderField(profileOptions, 'select')}
-          <Link to="/" className="btn btn-danger">Cancel</Link>
-          <button className="btn btn-primary" type="submit">Submit</button>
-        </form>
+        {this.renderForm()}
       </React.Fragment>
     )
   }

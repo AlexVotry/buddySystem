@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../../actions';
 import Header from '../Header';
 import Home from '../Home';
-import PostEvents from '../PostEvents';
+import PostEvents from '../Events/PostEvents';
 import ListByCat from '../ListByCat';
 import ListByDate from '../ListByDate';
 import ListByLocation from '../ListByLocation';
 import Profile from '../Profile';
 import Errors from '../Errors';
-import PostGroups from '../PostGroups';
-import Event from '../Event';
-import EventDetail from '../EventDetail';
+import PostGroups from '../Groups/PostGroups';
+import Event from '../Events';
+import EventDetail from '../Events/EventDetail';
 import './App.css';
 
 class App extends Component {
