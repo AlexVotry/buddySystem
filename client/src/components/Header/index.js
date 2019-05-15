@@ -7,7 +7,7 @@ import { Image, Transformation } from 'cloudinary-react';
 class Header extends Component {
   // this.props.auth is the result from the authReducer
   renderContent() {
-    console.log('auth: ', this.props.auth);
+    // console.log('auth: ', this.props.auth);
     
     switch (this.props.auth) {
       case null:
@@ -23,7 +23,7 @@ class Header extends Component {
           <div key="collapse" className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="item" key="profile"><Link to={'/profile'}>Profile</Link></li>
-              <li className="item" key="postEvent"><Link to={'/post'}>Post Event</Link></li>
+              <li className="item" key="postEvent"><Link to={'/postEvent'}>Post Event</Link></li>
               <li className="item" key="listCat"><Link to={'/category'}>List by Category</Link></li>
               <li className="item" key="listDate"><Link to={'/date'}>List by Date</Link></li>
               <li className="item" key="listLoc"><Link to={'/location'}>List by location</Link></li>

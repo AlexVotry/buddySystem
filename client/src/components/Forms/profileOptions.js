@@ -1,29 +1,28 @@
 import React from 'react';
-import { activities } from './seedDate';
 
-export default ({ input, label, meta: { error, touched } }) => {
+export default ({ input, label, checkBoxes, meta: { error, touched } }) => {
 
   const checkboxGroup = () => {
 
-    return activities.map((activity, index) => {
+    return checkBoxes.map((checkbox, index) => {
       return (
-        <div className="form-check form-check-inline" key={activity}>
+        <div className="form-check form-check-inline" key={checkbox}>
           <input className="form-check-input"
             type="checkbox"
             name={`${input.name}[${index}]`}
-            value={activity}
-            checked={input.value.indexOf(activity) !== -1}
+            value={checkbox}
+            checked={input.value.indexOf(checkbox) !== -1}
             onChange={(event) => {
               const newValue = [...input.value];
               if (event.target.checked) {
-                newValue.push(activity);
+                newValue.push(checkbox);
               } else {
-                newValue.splice(newValue.indexOf(activity), 1);
+                newValue.splice(newValue.indexOf(checkbox), 1);
               }
 
               return input.onChange(newValue);
             }} />
-          <label className="form-check-label" htmlFor={activity}>{activity}</label>
+          <label className="form-check-label" htmlFor={checkbox}>{checkbox}</label>
         </div>)
     });
   }

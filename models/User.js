@@ -17,7 +17,8 @@ const userSchema = new Schema({
   activities: [String],
   age: Number,
   gender: String,
-  friends: [String]
+  friends: [String],
+  groups: [{ type: Schema.Types.ObjectId, ref: 'groups' }]
 });
 
 module.exports = mongoose.model('users', userSchema);

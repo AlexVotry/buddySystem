@@ -1,18 +1,17 @@
 export const fields = {
   text: 
   [
-    { label: 'User Name', name: 'username' },
-    { label: 'Email', name: 'email' },
-    { label: 'Phone Number', name: 'phone' },
-    { label: 'Street Address', name: 'streetAddress' },
+    { label: 'User Name', name: 'userName', subscript: 'Must be a unique username'},
+    { label: 'Email', name: 'email', subscript: 'We will never share your email' },
+    { label: 'Phone Number', name: 'phone', subscript: 'We will never share you phone number'},
+    { label: 'Street Address', name: 'streetAddress', subscript: 'We will never share you address' },
     { label: 'City', name: 'city' },
     { label: 'State', name: 'state' },
-    { label: 'Age (this will not be shared)', name: 'age' },
-    { label: 'gender', name: 'gender' },
+    { label: 'Age', name: 'age', subscript: 'We will never share your age' },
   ],
-  upload: 
+  radio:
   [
-    { label: 'Profile Picture', name: 'image' },
+    { label: 'gender', name: 'gender' },
   ],
   select:
   [

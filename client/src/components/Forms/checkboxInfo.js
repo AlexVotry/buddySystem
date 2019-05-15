@@ -7,4 +7,10 @@ export const activities = [
   'nightclubs',
   'dancing',
   'pubs'
+];
+
+export const gender = [
+  'female',
+  'male',
+  'other'
 ]
