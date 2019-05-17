@@ -3,8 +3,8 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { map } from 'lodash';
 import { Link, Redirect } from 'react-router-dom';
-import profileInput from '../Forms/profileInput';
-import profileOptions from '../Forms/profileOptions';
+import inputGroup from '../Forms/inputGroup';
+import checkBoxField from '../Forms/checkBoxField';
 import { fields } from './formFields';
 import { submitGroup } from '../../actions';
 import { gender } from '../Forms/checkboxInfo';
@@ -30,8 +30,8 @@ class PostGroups extends React.Component {
     const { handleSubmit } = this.props;
     return (
       <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
-        {this.renderField(profileInput, 'text')}
-        {this.renderField(profileOptions, 'select')}
+        {this.renderField(inputGroup, 'text')}
+        {this.renderField(checkBoxField, 'select')}
         <Link to="/" className="btn btn-danger">Cancel</Link>
         <button className="btn btn-primary" type="submit">Submit</button>
       </form>

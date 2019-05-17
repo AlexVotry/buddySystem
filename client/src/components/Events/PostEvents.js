@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { map } from 'lodash';
 import { Link, Redirect } from 'react-router-dom';
 import { submitEvents } from '../../actions';
-import profileInput from '../Forms/profileInput';
-import profileOptions from '../Forms/profileOptions';
-import { activities } from '../Forms/checkboxInfo';
+import inputGroup from '../Forms/inputGroup';
+import checkBoxField from '../Forms/checkBoxField';
+import { categories } from '../Forms/checkboxInfo';
 
 class PostEvents extends React.Component {
   state = { redirect: false };
@@ -20,7 +20,7 @@ class PostEvents extends React.Component {
           key={name} component={field}
           label={label}
           name={name}
-          checkBoxes={activities}
+          checkBoxes={categories}
           subscript={subscript}
         />
       );
@@ -48,8 +48,8 @@ class PostEvents extends React.Component {
       <React.Fragment>
       { this.renderRedirect() }
       <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
-        {this.renderField(profileInput, 'text')}
-        {this.renderField(profileOptions, 'select')}
+        {this.renderField(inputGroup, 'text')}
+        {this.renderField(checkBoxField, 'select')}
         <Link to="/" className="btn btn-danger">Cancel</Link>
         <button className="btn btn-primary" type="submit">Submit</button>
       </form>

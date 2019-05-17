@@ -1,4 +1,4 @@
-export const activities = [
+export const categories = [
   'watching sports',
   'doing sports',
   'musicals',
@@ -6,7 +6,8 @@ export const activities = [
   'trivia',
   'nightclubs',
   'dancing',
-  'pubs'
+  'pubs',
+  'concert'
 ];
 
 export const gender = [

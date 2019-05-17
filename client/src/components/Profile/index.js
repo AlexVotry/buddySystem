@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { map, each }from 'lodash';
 import { Link, Redirect } from 'react-router-dom';
 import validateEmails from '../../utils/validateEmail';
-import profileInput from '../Forms/profileInput';
-import profileOptions from '../Forms/profileOptions';
+import inputGroup from '../Forms/inputGroup';
+import checkBoxField from '../Forms/checkBoxField';
 import { fields } from './formFields';
 import { submitProfile } from '../../actions';
 import UploadImage from '../Forms/UploadImage';
-import { activities } from '../Forms/checkboxInfo';
+import { categories } from '../Forms/checkboxInfo';
 
 
 class Profile extends Component {
@@ -23,7 +23,7 @@ class Profile extends Component {
           key={name} component={field} 
           label={label} 
           name={name} 
-          checkBoxes={activities}
+          checkBoxes={categories}
           subscript={subscript}
         />
       );
@@ -52,8 +52,8 @@ class Profile extends Component {
         <UploadImage />
         {this.renderRedirect()}
         <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
-          {this.renderField(profileInput, 'text')}
-          {this.renderField(profileOptions, 'select')}
+          {this.renderField(inputGroup, 'text')}
+          {this.renderField(checkBoxField, 'select')}
           <Link to="/" className="btn btn-danger">Cancel</Link>
           <button className="btn btn-primary" type="submit">Submit</button>
         </form>

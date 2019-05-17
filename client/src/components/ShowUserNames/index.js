@@ -6,6 +6,7 @@ const ShowUserNames = props => {
 
   const getUsers = async () => {
     const res = await axios.get(`/api/usernames/${props.groupId}`);
+    console.log('users:', res.data);
     setUserNames(res.data);
   }
   
