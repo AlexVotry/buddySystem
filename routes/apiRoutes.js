@@ -67,7 +67,6 @@ module.exports = app => {
   })
 
   app.get('/api/usernames/:id', (req, res) => {
-    console.log('users: ', req.params.id);
     const groups = req.params.id;
     db.User.find({ groups }, (err, response) => {
       if (err) {
@@ -78,17 +77,12 @@ module.exports = app => {
     });
 
   })
-
-  // app.get('/api/event/:id', (req, res) => {
-  //   const id = req.params.id;
-  //   console.log('event body:', req.params.id);
-  //   db.Event.findById(id, (err, response) => {
-  //     if (err) {
-  //       console.log('Event error', err.code);
-  //       res.json({ error: err.code });
-  //     }
-  //     res.json(response);
-  //   })
-  // });
-      
+  app.get('/api/checkForGroup/:id', (req, res) => {
+    const event = req.params.id;
+    db.Group.find({ event, users: req.user._id })
+      .then(groups => {
+        const response = groups.length > 0 ? true : false;
+        res.send(response);
+      })
+  })
 }

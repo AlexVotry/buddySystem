@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchOneEvent } from '../../actions';
-import PostGroups from '../PostGroups';
+import PostGroups from '../Groups/PostGroups';
 import Groups from '../Groups';
 
 
