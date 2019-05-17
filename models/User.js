@@ -14,7 +14,7 @@ const userSchema = new Schema({
   state: String,
   lat: Number,
   long: Number,
-  activities: [String],
+  categories: [String],
   age: Number,
   gender: String,
   friends: [String],
