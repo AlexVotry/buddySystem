@@ -4,18 +4,17 @@ import { connect } from 'react-redux';
 import { map } from 'lodash';
 import { Link, Redirect } from 'react-router-dom';
 import inputGroup from '../Forms/inputGroup';
-import checkBoxField from '../Forms/checkBoxField';
+import checkBoxGroup from '../Forms/checkBoxGroup';
 import { fields } from './formFields';
 import { submitGroup } from '../../actions';
 import { gender } from '../Forms/checkboxInfo';
 import axios from 'axios';
 
 class PostGroups extends React.Component {
-  state = { redirect: false, joined: false, eventId: window.localStorage.getItem('eventId') };
-  
+  state = { redirect: false, joined: false, eventId: this.props.eventId };
+
 
   componentDidMount() {
-    
     this.checkIfBelongToGroup();
   }
 
@@ -23,7 +22,7 @@ class PostGroups extends React.Component {
     const res = await axios.get(`/api/checkForGroup/${this.state.eventId}`);
     this.setState({joined: res.data})
   }
-  
+
   renderForm() {
     // this.setState({ joined: this.checkIfBelongToGroup(eventId) });
     if (this.state.joined) return null;
@@ -31,13 +30,13 @@ class PostGroups extends React.Component {
     return (
       <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
         {this.renderField(inputGroup, 'text')}
-        {this.renderField(checkBoxField, 'select')}
+        {this.renderField(checkBoxGroup, 'select')}
         <Link to="/" className="btn btn-danger">Cancel</Link>
         <button className="btn btn-primary" type="submit">Submit</button>
       </form>
     )
   }
-  
+
   renderField(field, input) {
     return map(fields[input], ({ label, name, subscript }) => {
       return (

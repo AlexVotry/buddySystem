@@ -9,6 +9,7 @@ module.exports = app => {
       { $push: { groups: groupId } }
     );
   }
+
   app.post('/api/profile', (req, res) => {
     const profile = req.body;
     const query = { googleId: req.user.googleId };
@@ -30,7 +31,7 @@ module.exports = app => {
       if (err) {
         console.log('Event error', err.code);
         res.json({error: err.code});
-      } 
+      }
       res.json(response);
     })
   });
@@ -60,7 +61,13 @@ module.exports = app => {
     const id = req.params.id;
 
     db.Event.findById(id)
-      .populate('groups')
+      .populate({
+        path: 'groups',
+        populate: {
+          path: 'users',
+          model: 'users'
+        }
+      })
       .then(dbEvent => {
         res.json(dbEvent);
       })
@@ -79,10 +86,11 @@ module.exports = app => {
   })
 
   app.get('/api/checkForGroup/:id', (req, res) => {
+    // finds all groups of event that current user belongs to.
     const event = req.params.id;
     db.Group.find({ event, users: req.user._id })
       .then(groups => {
-        const response = groups.length > 0 ? true : false;
+        const response = groups > 0 ? true : false;
         res.send(response);
       })
   })
@@ -99,4 +107,19 @@ module.exports = app => {
       res.json(response);
     })
   })
+
+  app.post('/api/adduser/:id', (req, res) => {
+    console.log('groupId;', req.params.id);
+    const groupId = req.params.id;
+
+    db.User.findOneAndUpdate({_id: req.user._id}, { $push: { groups: groupId } }, { new: true })
+    .then(user => {
+      db.Group.findOneAndUpdate({_id: groupId}, { $push: { users: req.user._id } }, { new: true })
+      .populate('users')
+      .then(group => {
+        res.json(group);
+      })
+    })
+  });
+
 }

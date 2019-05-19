@@ -6,7 +6,7 @@ import { map } from 'lodash';
 import { Link, Redirect } from 'react-router-dom';
 import { submitEvents } from '../../actions';
 import inputGroup from '../Forms/inputGroup';
-import checkBoxField from '../Forms/checkBoxField';
+import checkBoxGroup from '../Forms/checkBoxGroup';
 import { categories } from '../Forms/checkboxInfo';
 
 class PostEvents extends React.Component {
@@ -49,7 +49,7 @@ class PostEvents extends React.Component {
       { this.renderRedirect() }
       <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
         {this.renderField(inputGroup, 'text')}
-        {this.renderField(checkBoxField, 'select')}
+        {this.renderField(checkBoxGroup, 'select')}
         <Link to="/" className="btn btn-danger">Cancel</Link>
         <button className="btn btn-primary" type="submit">Submit</button>
       </form>

@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Image, Transformation } from 'cloudinary-react';
 
 const ShowUserNames = props => {
-  const [userNames, setUserNames] = useState([]);
-
-  const getUsers = async () => {
-    const res = await axios.get(`/api/usernames/${props.groupId}`);
-    console.log('users:', res.data);
-    setUserNames(res.data);
-  }
-  
-  useEffect(() => {
-    getUsers();
-  }, []);
 
   const renderUserNames = () => {
-    return userNames.map(name => {
-      return <div key={name._id}>{name.userName}</div>
-    })
+    return props.users.map((user, i) => {
+      return (
+        <div key={i}>
+          <Image cloudName="aleximages" publicId={user.image} style={{marginRight: '10px', borderRadius: '50%'}}>
+            <Transformation crop="pad" width="40" height="40" radius="50" />
+          </Image>
+        {user.userName},
+        </div>
+      );
+    });
   }
 
   return (

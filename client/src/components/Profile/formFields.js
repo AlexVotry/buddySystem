@@ -1,5 +1,5 @@
 export const fields = {
-  text: 
+  text:
   [
     { label: 'User Name', name: 'userName', subscript: 'Must be a unique username'},
     { label: 'Email', name: 'email', subscript: 'We will never share your email' },
@@ -15,6 +15,6 @@ export const fields = {
   ],
   select:
   [
-    { label: 'Activities you would like to participate in', name: 'activities' },
+    { label: 'Activities you would like to participate in', name: 'categories' },
   ]
 }

@@ -5,7 +5,7 @@ import { map, each }from 'lodash';
 import { Link, Redirect } from 'react-router-dom';
 import validateEmails from '../../utils/validateEmail';
 import inputGroup from '../Forms/inputGroup';
-import checkBoxField from '../Forms/checkBoxField';
+import checkBoxGroup from '../Forms/checkBoxGroup';
 import { fields } from './formFields';
 import { submitProfile } from '../../actions';
 import UploadImage from '../Forms/UploadImage';
@@ -18,11 +18,11 @@ class Profile extends Component {
   renderField(field, input) {
     return map(fields[input], ({ label, name, subscript }) => {
       return (
-        <Field 
-          className="field" 
-          key={name} component={field} 
-          label={label} 
-          name={name} 
+        <Field
+          className="field"
+          key={name} component={field}
+          label={label}
+          name={name}
           checkBoxes={categories}
           subscript={subscript}
         />
@@ -40,6 +40,7 @@ class Profile extends Component {
   }
 
   onSubmit = (formValues) => {
+    console.log('form:', formValues);
     formValues.image = this.props.image.id;
     this.props.submitProfile(formValues);
     this.setRedirect();
@@ -53,7 +54,7 @@ class Profile extends Component {
         {this.renderRedirect()}
         <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
           {this.renderField(inputGroup, 'text')}
-          {this.renderField(checkBoxField, 'select')}
+          {this.renderField(checkBoxGroup, 'select')}
           <Link to="/" className="btn btn-danger">Cancel</Link>
           <button className="btn btn-primary" type="submit">Submit</button>
         </form>
