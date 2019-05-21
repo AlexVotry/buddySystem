@@ -17,8 +17,9 @@ class Event extends React.Component {
       </div>
     );
   }
-  
+
   render () {
+    // TODO: this is rendering sooner than I get the eventId back, so returns null.
     if(!this.props.eventId) return null;
     return (
       <div>
@@ -33,7 +34,7 @@ class Event extends React.Component {
 const mapStateToProps = state => {
   const eventId = Object.keys(state.event)[0] || window.localStorage.getItem('eventId');
   const formEvent = state.form.eventForm ? state.form.eventForm.values : JSON.parse(window.localStorage.getItem('formValues'));
-  
+
   window.localStorage.setItem('eventId', eventId);
 
   return { formEvent, eventId };

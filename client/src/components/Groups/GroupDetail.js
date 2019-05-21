@@ -19,13 +19,17 @@ const GroupDetail = (props) => {
   }
 
   const checkIfBelongToGroup = async () => {
-    const res = await axios.get(`/api/checkForGroup/${this.state.eventId}`);
-    setJoined(res.data);  
+    const res = await axios.get(`/api/checkForGroup/${props.eventId}`);
+    setJoined(res.data);
   }
 
   useEffect(() => {
     checkIfBelongToGroup();
   }, [])
+
+  useEffect(() => {
+    props.doTheCheck(joined);
+  }, [joined])
 
   const renderGroup = () => {
     return (
@@ -35,7 +39,7 @@ const GroupDetail = (props) => {
           <p>Prefered gender: {group.gender.map( g => <span key={g}>{g}, </span>)}</p>
           <p>Maximum friends: {group.max}</p>
           <ShowUserNames users={group.users} />
-          <button className="btn btn-light" onClick={() => {joinGroup(group._id)}}>join group</button>
+          <button className="btn btn-light" disabled={joined} onClick={() => {joinGroup(group._id)}}>join group</button>
           <button className="btn btn-danger"onClick={() => {quitGroup(group._id)}}>quit group</button>
         </div>
       </div>

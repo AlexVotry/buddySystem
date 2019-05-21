@@ -8,7 +8,7 @@ const Groups = props => {
     if (!groups) return null;
     return groups.map(group => {
       return (
-        <GroupDetail group={group} key={group._id}/>
+        <GroupDetail doTheCheck={props.doTheCheck} eventId={props.eventId} group={group} key={group._id}/>
       )
     })
   }

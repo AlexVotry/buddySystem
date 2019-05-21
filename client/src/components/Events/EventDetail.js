@@ -5,10 +5,12 @@ import PostGroups from '../Groups/PostGroups';
 
 const EventDetail = props => {
   const [event, setEvent] = useState({});
+  const [joined, setJoined] = useState(false);
   const eventId = props.match.params.id;
 
   useEffect(() => {
     fetchEventWithGroups(eventId);
+    initialCheckForGroup();
     window.localStorage.setItem('eventId', eventId)
   }, []);
 
@@ -16,6 +18,16 @@ const EventDetail = props => {
     const res = await axios.get(`/api/event/${id}`);
     setEvent(res.data);
   }
+
+  const initialCheckForGroup = async () => {
+    const res = await axios.get(`/api/checkForGroup/${eventId}`);
+    setJoined(res.data);
+  }
+
+  const checkIfBelongToGroup = (update) => {
+    setJoined(update);
+  }
+
   return (
     <Fragment>
       <div className="jumbotron">
@@ -23,10 +35,8 @@ const EventDetail = props => {
         <div>{event.url}</div>
         <div>{event.cost}</div>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Groups eventGroups={event.groups} />
-        <PostGroups eventId={eventId}/>
-      </Suspense>
+        <Groups doTheCheck={checkIfBelongToGroup} eventId={eventId} eventGroups={event.groups} />
+        <PostGroups joined={joined} eventId={eventId}/>
     </Fragment>
   )
 

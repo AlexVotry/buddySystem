@@ -11,21 +11,9 @@ import { gender } from '../Forms/checkboxInfo';
 import axios from 'axios';
 
 class PostGroups extends React.Component {
-  state = { redirect: false, joined: false, eventId: this.props.eventId };
-
-
-  componentDidMount() {
-    this.checkIfBelongToGroup();
-  }
-
-  checkIfBelongToGroup = async () => {
-    const res = await axios.get(`/api/checkForGroup/${this.state.eventId}`);
-    this.setState({joined: res.data})
-  }
 
   renderForm() {
-    // this.setState({ joined: this.checkIfBelongToGroup(eventId) });
-    if (this.state.joined) return null;
+    if (this.props.joined) return null;
     const { handleSubmit } = this.props;
     return (
       <form className="form-group" onSubmit={handleSubmit(this.onSubmit)}>
@@ -52,27 +40,15 @@ class PostGroups extends React.Component {
     });
   };
 
-  setRedirect = () => {
-    this.setState({ redirect: true });
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to={`/detail/${this.state.eventId}`} />
-    }
-  }
-
   onSubmit = (formValues) => {
     formValues.users = [this.props.user._id];
-    formValues.event = this.state.eventId;
+    formValues.event = this.props.eventId;
     this.props.submitGroup(formValues, this.props.user._id);
-    this.setRedirect();
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.renderRedirect()}
         {this.renderForm()}
       </React.Fragment>
     )

@@ -87,10 +87,10 @@ module.exports = app => {
 
   app.get('/api/checkForGroup/:id', (req, res) => {
     // finds all groups of event that current user belongs to.
-    const event = req.params.id;
+    const event = req.params.id || 0;
     db.Group.find({ event, users: req.user._id })
       .then(groups => {
-        const response = groups > 0 ? true : false;
+        const response = groups.length > 0 ? true : false;
         res.send(response);
       })
   })
