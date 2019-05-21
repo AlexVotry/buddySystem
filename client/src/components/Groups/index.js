@@ -4,11 +4,10 @@ import GroupDetail from './GroupDetail';
 const Groups = props => {
 
   const renderGroups = () => {
-    const groups = props.eventGroups;
-    if (!groups) return null;
-    return groups.map(group => {
+    if (!props.eventGroups) return null;
+    return props.eventGroups.map(group => {
       return (
-        <GroupDetail group={group} key={group._id}/>
+        <GroupDetail joined={props.joined} fetch={props.fetch} doTheCheck={props.doTheCheck} eventId={props.eventId} group={group} key={group._id}/>
       )
     })
   }

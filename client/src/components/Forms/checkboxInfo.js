@@ -13,5 +13,5 @@ export const categories = [
 export const gender = [
   'female',
   'male',
-  'other'
+  'non-binary'
 ]
