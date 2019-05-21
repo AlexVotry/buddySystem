@@ -7,6 +7,13 @@ const GroupDetail = (props) => {
 
   const joinGroup = async (id) => {
     const res = await axios.post(`/api/adduser/${id}`);
+    console.log('joindata:', res.data);
+    setGroup(res.data);
+  }
+
+  const quitGroup = async (id) => {
+    const res = await axios.post(`/api/removeuser/${id}`);
+    console.log('quitdata:', res.data);
     setGroup(res.data);
   }
 
@@ -19,7 +26,7 @@ const GroupDetail = (props) => {
           <p>Maximum friends: {group.max}</p>
           <ShowUserNames users={group.users} />
           <button className="btn btn-light" onClick={() => {joinGroup(group._id)}}>join group</button>
-          <button className="btn btn-danger">quit group</button>
+          <button className="btn btn-danger"onClick={() => {quitGroup(group._id)}}>quit group</button>
         </div>
       </div>
     );
