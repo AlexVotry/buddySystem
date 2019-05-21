@@ -17,10 +17,11 @@ class ListByCat extends React.Component {
   fetchEvents = async (q) => {
     const query = q;
     const res = await axios.get(`/api/eventsByCategory/${query}`);
+    console.log('events:', res.data);
     this.setState({events: res.data});
     window.localStorage.setItem('defaultCategory', query);
   };
-  
+
   onClick = (e) => {
     console.log(e);
     console.log(this.props.auth);
@@ -53,7 +54,7 @@ class ListByCat extends React.Component {
       let date = moment(event.date).format('MM-DD-YYYY');
       return (
         <div key={event._id} className="list-group">
-          <Link to={`/detail/${event._id}`} className="list-group-item list-group-item-action">
+          <Link to={`/event/${event._id}`} className="list-group-item list-group-item-action">
           <h2>{event.title}</h2>
           <p>{date} <span>{event.category}</span><span>{event.cost}</span></p>
           </Link>
@@ -75,5 +76,5 @@ class ListByCat extends React.Component {
 const mapStateToProps = ({auth}) => {
   return {auth};
 }
-    
+
 export default connect(mapStateToProps)(ListByCat);

@@ -129,7 +129,16 @@ module.exports = app => {
       db.Group.findOneAndUpdate({_id: groupId}, {$pull: { users: { $in: [req.user._id]}}}, {new: true})
       .populate('users')
       .then(group => {
-        res.json(group);
+        console.log('userslen:', group.users.length);
+        if(group.users.length === 0) {
+          db.Group.findOneAndDelete({_id: groupId})
+          .then(finalGroups => {
+            console.log('empty');
+            res.json(finalGroups);
+          });
+        } else {
+          res.json(group);
+        }
       })
     })
   });

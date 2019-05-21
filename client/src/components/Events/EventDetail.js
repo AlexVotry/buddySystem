@@ -6,17 +6,19 @@ import PostGroups from '../Groups/PostGroups';
 const EventDetail = props => {
   const [event, setEvent] = useState({});
   const [joined, setJoined] = useState(false);
+  const [updated, setUpdated] = useState(false);
   const eventId = props.match.params.id;
 
   useEffect(() => {
-    fetchEventWithGroups(eventId);
+    fetchEventWithGroups(joined);
     initialCheckForGroup();
     window.localStorage.setItem('eventId', eventId)
   }, []);
 
-  const fetchEventWithGroups = async (id) => {
-    const res = await axios.get(`/api/event/${id}`);
+  const fetchEventWithGroups = async (bool) => {
+    const res = await axios.get(`/api/event/${eventId}`);
     setEvent(res.data);
+    setJoined(bool);
   }
 
   const initialCheckForGroup = async () => {
@@ -24,8 +26,8 @@ const EventDetail = props => {
     setJoined(res.data);
   }
 
-  const checkIfBelongToGroup = (update) => {
-    setJoined(update);
+  const checkIfBelongToGroup = async (update) => {
+    await setJoined(update);
   }
 
   return (
@@ -35,8 +37,8 @@ const EventDetail = props => {
         <div>{event.url}</div>
         <div>{event.cost}</div>
       </div>
-        <Groups doTheCheck={checkIfBelongToGroup} eventId={eventId} eventGroups={event.groups} />
-        <PostGroups joined={joined} eventId={eventId}/>
+        <Groups fetch={fetchEventWithGroups} joined={joined} eventId={eventId} doTheCheck={checkIfBelongToGroup}  eventGroups={event.groups} />
+        <PostGroups fetch={fetchEventWithGroups} joined={joined} eventId={eventId} doTheCheck={checkIfBelongToGroup}/>
     </Fragment>
   )
 

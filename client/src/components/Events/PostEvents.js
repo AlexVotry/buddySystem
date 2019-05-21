@@ -32,14 +32,13 @@ class PostEvents extends React.Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to={`/detail/${this.props.event._id}`}/>
+      return <Redirect to={`/event/${this.props.event._id}`}/>
     }
   }
 
   onSubmit = async (formValues) => {
     await this.props.submitEvent(formValues);
     window.localStorage.setItem('formValues', JSON.stringify(formValues));
-    console.log('response:', this.props.event);
     this.setRedirect();
   }
 
@@ -59,7 +58,6 @@ class PostEvents extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log('postEvent state:', state);
   return {event: state.event[0]};
 }
 

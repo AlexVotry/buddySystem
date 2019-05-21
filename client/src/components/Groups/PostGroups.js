@@ -40,10 +40,12 @@ class PostGroups extends React.Component {
     });
   };
 
-  onSubmit = (formValues) => {
+  onSubmit = async (formValues) => {
     formValues.users = [this.props.user._id];
     formValues.event = this.props.eventId;
-    this.props.submitGroup(formValues, this.props.user._id);
+    await this.props.submitGroup(formValues, this.props.user._id);
+    this.props.doTheCheck(true);
+    this.props.fetch(true);
   }
 
   render() {

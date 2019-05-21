@@ -11,7 +11,7 @@ import ListByLocation from '../ListByLocation';
 import Profile from '../Profile';
 import Errors from '../Errors';
 import PostGroups from '../Groups/PostGroups';
-import Event from '../Events';
+// import Event from '../Events';
 import EventDetail from '../Events/EventDetail';
 import './App.css';
 
@@ -34,8 +34,7 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/postGroups" component={PostGroups} />
             <Route exact path="/error" component={Errors} />
-            <Route exact path="/event" component={Event} />
-            <Route exact path="/detail/:id" component={EventDetail} />
+            <Route exact path="/event/:id" component={EventDetail} />
           </div>
         </BrowserRouter>
       </div>
