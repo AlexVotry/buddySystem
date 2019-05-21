@@ -8,17 +8,14 @@ const EventDetail = props => {
   const eventId = props.match.params.id;
 
   useEffect(() => {
-    console.log('eventId', eventId);
     fetchEventWithGroups(eventId);
     window.localStorage.setItem('eventId', eventId)
   }, []);
 
   const fetchEventWithGroups = async (id) => {
     const res = await axios.get(`/api/event/${id}`);
-    console.log('event with groups:', res.data);
     setEvent(res.data);
   }
-  console.log('eventId eventDetail:', eventId);
   return (
     <Fragment>
       <div className="jumbotron">

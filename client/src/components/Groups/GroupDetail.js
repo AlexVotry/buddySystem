@@ -1,21 +1,31 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import ShowUserNames from '../ShowUserNames';
 import axios from 'axios';
 
 const GroupDetail = (props) => {
   const [group, setGroup] = useState(props.group);
+  const [joined, setJoined] = useState(true);
 
   const joinGroup = async (id) => {
     const res = await axios.post(`/api/adduser/${id}`);
-    console.log('joindata:', res.data);
     setGroup(res.data);
+    setJoined(true);
   }
 
   const quitGroup = async (id) => {
     const res = await axios.post(`/api/removeuser/${id}`);
-    console.log('quitdata:', res.data);
     setGroup(res.data);
+    setJoined(false);
   }
+
+  const checkIfBelongToGroup = async () => {
+    const res = await axios.get(`/api/checkForGroup/${this.state.eventId}`);
+    setJoined(res.data);  
+  }
+
+  useEffect(() => {
+    checkIfBelongToGroup();
+  }, [])
 
   const renderGroup = () => {
     return (

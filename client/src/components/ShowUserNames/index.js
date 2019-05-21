@@ -10,7 +10,7 @@ const ShowUserNames = props => {
           <Image cloudName="aleximages" publicId={user.image} style={{marginRight: '10px', borderRadius: '50%'}}>
             <Transformation crop="pad" width="40" height="40" radius="50" />
           </Image>
-        {user.userName},
+        {user.userName}
         </div>
       );
     });
