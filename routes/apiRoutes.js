@@ -109,7 +109,6 @@ module.exports = app => {
   })
 
   app.post('/api/adduser/:id', (req, res) => {
-    console.log('groupId;', req.params.id);
     const groupId = req.params.id;
 
     db.User.findOneAndUpdate({_id: req.user._id}, { $push: { groups: groupId } }, { new: true })
@@ -122,4 +121,16 @@ module.exports = app => {
     })
   });
 
+  app.post('/api/removeuser/:id', (req, res) => {
+    console.log('groupId;', req.params.id);
+    const groupId = req.params.id;
+    db.User.update({_id: req.user._id}, { $pull: { groups: { $in: [groupId] } } })
+    .then(user => {
+      db.Group.findOneAndUpdate({_id: groupId}, {$pull: { users: { $in: [req.user._id]}}}, {new: true})
+      .populate('users')
+      .then(group => {
+        res.json(group);
+      })
+    })
+  });
 }
