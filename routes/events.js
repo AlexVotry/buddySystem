@@ -1,5 +1,6 @@
 require('mongoose');
 const db = require('../models');
+const maps = require('../services/maps');
 
 module.exports = app => {
 
@@ -10,9 +11,11 @@ module.exports = app => {
     );
   }
 
-  app.post('/api/event', (req, res) => {
+  app.post('/api/event', async (req, res) => {
     const event = req.body;
-    console.log('event:', event);
+    const address = await maps.geocoder(`${event.streetAddress}+${event.city}+${event.state}`);
+    event.lat = address.Latitude;
+    event.long = address.Longitude;
 
     db.Event.create(event, (err, response) => {
       if (err) {

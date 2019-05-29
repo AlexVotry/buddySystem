@@ -34,6 +34,7 @@ require('./routes/authRoutes')(app);
 require('./routes/events')(app);
 require('./routes/groups')(app);
 require('./routes/users')(app);
+require('./routes/map')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

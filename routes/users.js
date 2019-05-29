@@ -1,18 +1,15 @@
 require('mongoose');
 const db = require('../models');
+const maps = require('../services/maps');
 
 module.exports = app => {
 
-  const findAndUpdate = (doc, docId, groupId) => {
-    return doc.findOneAndUpdate(
-      { _id: docId },
-      { $push: { groups: groupId } }
-    );
-  }
-
-  app.post('/api/profile', (req, res) => {
+  app.post('/api/profile', async (req, res) => {
     const profile = req.body;
     const query = { googleId: req.user.googleId };
+    const address = await maps.geocoder(`${profile.streetAddress}+${profile.city}+${profile.state}`);
+    profile.lat = address.Latitude;
+    profile.long = address.Longitude;
 
     db.User.findOneAndUpdate(query, { $set: profile }, { new: true }, (err, response) => {
       if (err) {

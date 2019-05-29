@@ -9,6 +9,8 @@ const eventSchema = new Schema({
   streetAddress: String,
   city: String,
   state: String,
+  lat: Number,
+  long: Number,
   neighborhood: String,
   category: [String],
   groups: [{ type: Schema.Types.ObjectId, ref: 'groups' }]
