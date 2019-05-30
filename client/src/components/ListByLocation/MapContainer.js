@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
+import { Map, TileLayer, Marker, Polygon, Popup } from 'react-leaflet';
 import { hereTileUrl } from './here';
 import axios from 'axios';
 
@@ -24,46 +24,28 @@ class MapContainer extends React.Component {
     this.props.handleMarkerDrag(center);
   }
 
-  getUrl = async () => {
-    const url = await axios.get('/api/mapUrl', { params: this.state });
-    console.log('url: ', url.data);
-    this.setState({url: url.data});
-  }
-
-  componentDidMount = async () => {
-    this.getUrl('reduced.night');
-  }
-
   render() {
+    const position = this.props.center;
     return (
-      <div className="map">
-        <Map
-          center={this.props.center}
-          zoom={this.props.zoom}
-          zoomControl={false}
-          attributionControl={false}
-          onMoveend={this.handleMapMove}
-          ref={this.map}
-        >
-          <TileLayer
-            url={this.state.url}
-          />
-          <Marker
-            position={this.props.center}
-            draggable={true}
-            onDragEnd={this.handleMarkerDrag}
-            ref={this.marker}
-          />
-          <Polygon
-            fillOpacity={0.1}
-            weight={2}
-            positions={this.props.isoline}
-            color={this.props.color}
-          />
-        </Map>
-      </div>
-    )
+      <Map center={position} zoom={this.props.zoom}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.here.com/">here.com</a> contributors'
+          url={hereTileUrl('reduced.night')}
+        />
+        <Marker position={position}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+        <Polygon
+          fillOpacity={0.1}
+          weight={2}
+          positions={this.props.isoline}
+          color={this.props.color}
+        />
+      </Map>
+    );
   }
-
 }
+
 export default MapContainer;

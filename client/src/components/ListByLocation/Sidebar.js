@@ -1,4 +1,5 @@
 import React from 'react';
+import './map.css';
 
 
 const Sidebar = (props) => {
@@ -104,18 +105,6 @@ const Sidebar = (props) => {
             className="slider"
           />
         </div> */}
-        <div className="section subtitle">
-          <div>HERE Routing Isoline {' '}
-            <a href="https://developer.here.com/documentation/routing/topics/request-isoline.html">
-              documentation
-                  </a>
-          </div>
-          <br />
-          <div>
-            Made by <a href="https://twitter.com/dbabbs">@dbabbs</a>
-          </div>
-
-        </div>
 
       </div>
     </div>

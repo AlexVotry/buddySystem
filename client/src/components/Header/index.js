@@ -5,10 +5,7 @@ import { Image, Transformation } from 'cloudinary-react';
 
 
 class Header extends Component {
-  // this.props.auth is the result from the authReducer
   renderContent() {
-    // console.log('auth: ', this.props.auth);
-    
     switch (this.props.auth) {
       case null:
         return;

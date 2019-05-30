@@ -14,10 +14,11 @@ module.exports = {
   },
 
   mapIsolineUrl: async options => {
+    console.log('options:', options.color);
     const isoline = await axios.get(`https://isoline.route.api.here.com/routing/7.2/calculateisoline.json
       ?app_id=${mapId}
       &app_code=${mapCode}
-      &mode=shortest;${options.mode};
+      &mode=shortest;${options.mode}
       traffic:${options.traffic ? 'enabled' : 'disabled'}
       &start=geo!${options.center[0]},${options.center[1]}
       &range=${options.range}
@@ -26,10 +27,8 @@ module.exports = {
     return isoline;
   },
 
-  mapTileUrl: async style => {
-    const map = await axios.get(`https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/${style}/13/4400/2686/512/png8?app_id=${mapId}&app_code=${mapCode}&ppi=320`);
-
-    return map;
+  mapTileUrl: style => {
+    return `https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/512/png8?app_id=${mapId}&app_code=${mapCode}&ppi=320`
   },
 
   maxIsolineRangeLookup: {
