@@ -2,13 +2,12 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { map } from 'lodash';
-import { Link, Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import inputGroup from '../Forms/inputGroup';
 import checkBoxGroup from '../Forms/checkBoxGroup';
 import { fields } from './formFields';
 import { submitGroup } from '../../actions';
 import { gender } from '../Forms/checkboxInfo';
-import axios from 'axios';
 
 class PostGroups extends React.Component {
 

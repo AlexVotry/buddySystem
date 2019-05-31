@@ -3,10 +3,12 @@ dependencies:
   axios: 0.18.0
   cloudinary-react: 1.1.0
   http-proxy-middleware: 0.19.1
+  leaflet: 1.5.1
   lodash: 4.17.11
   moment: 2.24.0
   react: 16.8.6
   react-dom: 16.8.6
+  react-leaflet: 2.3.0
   react-redux: 7.0.3
   react-router-dom: 5.0.0
   react-scripts: 2.1.8
@@ -1412,6 +1414,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-w0+uT71b6Yi7i5SE0co4NioIpSYS6lLiXvCzWzGSKvpK5vdQtCbICHMj+gbAKAOtxiV6HsVh/MBdaF9EQ6faSg==
+  /@babel/runtime/7.4.5:
+    dependencies:
+      regenerator-runtime: 0.13.2
+    dev: false
+    resolution:
+      integrity: sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
   /@babel/template/7.4.4:
     dependencies:
       '@babel/code-frame': 7.0.0
@@ -6855,6 +6863,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-avPEb8P8EGnwXKClwsNUgryVjllcRqtMYa49NTsbQagYuT1DcXnl1915oxWjoyGrXR6zH/Y0Zc96xWsPcoDKeA==
+  /leaflet/1.5.1:
+    dev: false
+    resolution:
+      integrity: sha512-ekM9KAeG99tYisNBg0IzEywAlp0hYI5XRipsqRXyRTeuU8jcuntilpp+eFf5gaE0xubc9RuSNIVtByEKwqFV0w==
   /left-pad/1.3.0:
     deprecated: use String.prototype.padStart()
     resolution:
@@ -9113,6 +9125,19 @@ packages:
   /react-is/16.8.6:
     resolution:
       integrity: sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
+  /react-leaflet/2.3.0:
+    dependencies:
+      '@babel/runtime': 7.4.5
+      fast-deep-equal: 2.0.1
+      hoist-non-react-statics: 3.3.0
+      warning: 4.0.3
+    dev: false
+    peerDependencies:
+      leaflet: ^1.5.1
+      react: ^16.8.0
+      react-dom: ^16.8.0
+    resolution:
+      integrity: sha512-LaTkopN3rpMWzg2/ev/Ryn5K528ORrf3BdpnH7Qz2HYj+c9pw331wMOQPp6ILV3PYz0T1G6Foz+B2GDz59C10Q==
   /react-lifecycles-compat/3.0.4:
     dev: false
     resolution:
@@ -10996,6 +11021,12 @@ packages:
       makeerror: 1.0.11
     resolution:
       integrity: sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
+  /warning/4.0.3:
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
+    resolution:
+      integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
   /watch/0.18.0:
     dependencies:
       exec-sh: 0.2.2
@@ -11458,10 +11489,12 @@ specifiers:
   enzyme-adapter-react-16: ^1.12.1
   http-proxy-middleware: ^0.19.1
   jest-enzyme: ^7.0.2
+  leaflet: ^1.5.1
   lodash: ^4.17.11
   moment: ^2.24.0
   react: ^16.8.6
   react-dom: ^16.8.6
+  react-leaflet: ^2.3.0
   react-redux: ^7.0.2
   react-router-dom: ^5.0.0
   react-scripts: 2.1.8

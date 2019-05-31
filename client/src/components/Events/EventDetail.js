@@ -1,4 +1,4 @@
-import React, {Suspense, Fragment, useState, useEffect} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import axios from 'axios';
 import Groups from '../Groups';
 import PostGroups from '../Groups/PostGroups';
@@ -6,7 +6,6 @@ import PostGroups from '../Groups/PostGroups';
 const EventDetail = props => {
   const [event, setEvent] = useState({});
   const [joined, setJoined] = useState(false);
-  const [updated, setUpdated] = useState(false);
   const eventId = props.match.params.id;
 
   useEffect(() => {
