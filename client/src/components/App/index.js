@@ -7,7 +7,7 @@ import Home from '../Home';
 import PostEvents from '../Events/PostEvents';
 import ListByCat from '../ListByCat';
 import ListByDate from '../ListByDate';
-import ListByLocation from '../ListByLocation/LocationWrapper';
+import ListByLocation from '../ListByLocation';
 import Profile from '../Profile';
 import Errors from '../Errors';
 import PostGroups from '../Groups/PostGroups';

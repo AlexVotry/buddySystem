@@ -67,6 +67,7 @@ class LocationWrapper extends React.Component {
   }
 
   render() {
+    console.log('this.props.auth', this.props.auth);
     if (this.state.center.length === 0) return null;
     const max = this.state.type === 'distance' ?
       maxIsolineRangeLookup.distance :
