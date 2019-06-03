@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 import { categories } from '../Forms/checkboxInfo';
+import Dropdown from '../Dropdown';
 
 class ListByCat extends React.Component {
   state = { events: [] };
@@ -23,30 +24,7 @@ class ListByCat extends React.Component {
   };
 
   onClick = (e) => {
-    console.log(e);
-    console.log(this.props.auth);
     this.fetchEvents(e)
-
-  }
-
-  renderDropdown = () => {
-    return (
-      <div className="dropdown">
-        <button className="btn btn-secondary dropdown-toggle"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Categories
-        </button>
-
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          {this.renderCategories()}
-        </div>
-      </div>
-    )
-  }
-
-  renderCategories = () => {
-    return categories.map(category => {
-      return <button className="dropdown-item" key={category} onClick={() => this.onClick(category)}>{category}</button>
-    })
   }
 
   renderEvents = () => {
@@ -66,7 +44,8 @@ class ListByCat extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.renderDropdown()}
+        {/* {this.renderDropdown()} */}
+        <Dropdown items={categories} title="Categories" onClick={this.onClick} />
         {this.renderEvents()}
       </React.Fragment>
     )
