@@ -12,7 +12,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+#root {
+  margin: 0 auto;
+}
 
 .item {
   margin-right: 1rem;
+}
+.item a {
+  color: red;
+}
+
+.item a:hover {
+  color: green;
 }

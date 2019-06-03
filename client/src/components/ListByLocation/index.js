@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { hereIsolineUrl, maxIsolineRangeLookup } from './here';
+import { categories } from '../Forms/checkboxInfo';
 import './map.css';
 
 import Sidebar from './Sidebar';
@@ -24,7 +25,8 @@ class ListByLocation extends React.Component {
     type: 'time',
     traffic: false,
     zoom: 12,
-    counter: 0
+    counter: 0,
+    events: []
   };
   // }
 
@@ -57,6 +59,17 @@ class ListByLocation extends React.Component {
     }
   }
 
+  fetchEvents = async (q) => {
+    const query = q;
+    const res = await axios.get(`/api/eventsByCategory/${query}`);
+    this.setState({ events: res.data });
+    window.localStorage.setItem('defaultCategory', query);
+  };
+
+  onClick = (e) => {
+    this.fetchEvents(e)
+  }
+
   handleMapMove = (zoom) => this.setState({ zoom });
 
   handleMarkerDrag = (center) => this.setState({ center }, () => this.updateIsoline());
@@ -74,7 +87,6 @@ class ListByLocation extends React.Component {
   }
 
   render() {
-    console.log('this.props.auth', this.props.auth);
     if (this.state.center.length === 0) {
       return <div>loading...</div>;
     }
@@ -91,6 +103,8 @@ class ListByLocation extends React.Component {
             max={max}
             sliderVal={sliderVal}
             options={this.state}
+            categories={categories}
+            onClick={this.onClick}
           />
           <MapContainer
             color={this.state.color}
@@ -99,6 +113,7 @@ class ListByLocation extends React.Component {
             zoom={this.state.zoom}
             handleMapMove={this.handleMapMove}
             handleMarkerDrag={this.handleMarkerDrag}
+            events={this.state.events}
           />
         </div>
       </div>

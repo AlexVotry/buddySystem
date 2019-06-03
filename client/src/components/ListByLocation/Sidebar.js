@@ -1,94 +1,95 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './map.css';
+import Dropdown from '../Dropdown';
 
 
 const Sidebar = (props) => {
+  const [category, setCategory] = useState('');
+  const onClick = (e) => {
+    props.onClick(e);
+    setCategory(e);
+  }
+
+  const showCategory = () => {
+    if (category) {
+      return (
+        <div className="section">
+          <div className="section-title green">
+            {category}
+          </div>
+        </div>    
+      );
+    }
+  }
 
   return (
     <div className="sidebar">
       <div className="header">
-        <h1>HERE Isoline Explorer</h1>
-        <div className="subtitle">HERE Routing Isolines in action.</div>
+        <h1>Events On the Map</h1>
+        <div className="subtitle">Choose a category and find it on the map</div>
       </div>
       <div className="content">
         <div className="section">
+          <Dropdown items={props.categories} title="Categories" onClick={onClick} />
+          {showCategory()}
           <div className="section-title">
             Transporation mode
-               </div>
-          {/* <div>
-            <lui-radiobutton
-              onClick={() => props.updateOptions('pedestrian', 'mode')}
-              class="lui-small"
-            >
-              <input
-                type="radio"
-                name="mode"
-                value="pedestrian"
-                checked={props.options.mode === 'pedestrian'}
-              />
-              Pedestrian
-                  </lui-radiobutton>
-            <lui-radiobutton
-              onClick={() => props.updateOptions('car', 'mode')}
-              class="lui-small"
-            >
-              <input
-                type="radio"
-                checked={props.options.mode === 'car'}
-
-              />
+          </div>
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="pedestrian" id="radioTime" value="car" checked={props.options.mode === 'car' ? true : false} onChange={() => props.updateOptions('car', 'mode')} />
+            <label className="form-check-label">
               Car
-                  </lui-radiobutton>
-          </div> */}
+            </label>
+          </div>
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="pedestrian" id="radioTime" value="pedestrian" checked={props.options.mode === 'pedestrian' ? true : false} onChange={() => props.updateOptions('pedestrian', 'mode')} />
+            <label className="form-check-label">
+              Pedestrian
+            </label>
+          </div>
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="pedestrian" id="radioTime" value="bicycle" checked={props.options.mode === 'bicycle' ? true : false} onChange={() => props.updateOptions('bicycle', 'mode')} />
+            <label className="form-check-label">
+              Bicycle
+            </label>
+          </div>
         </div>
-        {/* <div className="section">
-          <div className="section-title">
-            Traffic enabled
-               </div>
-          <lui-checkbox
-            class="lui-small"
-            onClick={() => props.updateOptions(!props.options.traffic, 'traffic')}
-          >
-            <input
-              type="checkbox"
-              checked={props.options.traffic}
-            />
-            Traffic
-               </lui-checkbox>
-        </div> */}
+        <div className="section">
+          <label className="form-check section-title">
+              <input
+                className="form-check-input" 
+                type="checkbox"
+                name="traffic"
+                checked={props.options.traffic}
+                onChange={() => props.updateOptions(!props.options.traffic, 'traffic')}
+                />
+              Traffic enabled
+            </label>
+        </div>
 
-        {/* <div className="section">
+        <div className="section">
           <div className="section-title">
             Time or distance
-               </div>
-          <lui-radiobutton-group>
-            <lui-radiobutton
-              onClick={() => props.updateOptions('distance', 'type')}
-              class="lui-small"
-            >
-              <input
-                type="radio"
-                checked={props.options.type === 'distance'}
-              />
+           </div>
 
-              Distance
-                  </lui-radiobutton>
-            <lui-radiobutton
-              onClick={() => props.updateOptions('time', 'type')}
-              class="lui-small"
-            >
-              <input
-                type="radio"
-                checked={props.options.type === 'time'}
-              />
-              Time
-                  </lui-radiobutton>
-          </lui-radiobutton-group>
-        </div> */}
-        {/* <div className="section">
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="time" id="radioTime" value="time" checked={props.options.type === 'time' ? true : false} onChange={() => props.updateOptions('time', 'type')} />
+              <label className="form-check-label">
+                 Time
+              </label>
+          </div>
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="distance" id="radioDistance" value="distance" checked={props.options.type === 'distance' ? true : false} onChange={() => props.updateOptions('distance', 'type')} />
+              <label className="form-check-label">
+                Distance
+              </label>
+          </div>
+        </div>
+
+        <div className="section">
           <div className="section-title">
             Range
-               </div>
+          </div>
           <p>
             {
               props.options.type === 'distance' ?
@@ -104,7 +105,7 @@ const Sidebar = (props) => {
             value={props.sliderVal}
             className="slider"
           />
-        </div> */}
+        </div>
 
       </div>
     </div>
