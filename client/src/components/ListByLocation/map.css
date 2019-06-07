@@ -75,6 +75,9 @@ h1 {
    font-size: 15px;
    font-weight: 500;
    margin-bottom: 10px;
+  }
+.green {
+  color: #85e0ce
 }
 
 .slider {
