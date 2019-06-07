@@ -9,7 +9,7 @@ export const fetchUser = () => async dispatch => {
 
 export const submitProfile = values => async dispatch => {
   const res = await axios.post('/api/profile', values);
-
+      console.log('req.body:', res);
   dispatch({ type: type.CREATE_PROFILE, payload: res.data });
 };
 
