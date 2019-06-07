@@ -25,7 +25,7 @@ class Header extends Component {
               <li className="item" key="listDate"><Link to={'/date'}>List by Date</Link></li>
               <li className="item" key="listLoc"><Link to={'/location'}>List by location</Link></li>
             </ul>
-            <Image cloudName="aleximages" publicId={this.props.auth.image} style={{marginRight: '10px', borderRadius: '50%'}}>
+            <Image cloudName="aleximages" publicId={this.props.image.id || this.props.auth.image} style={{marginRight: '10px', borderRadius: '50%'}}>
               <Transformation crop="pad" width="40" height="40" radius="50" />
             </Image>
             <a href="/api/logout" className=".mr-md-3 navbar-text">Logout</a>
@@ -35,6 +35,7 @@ class Header extends Component {
   }
 
   render() {
+    console.log('header auth:', this.props.auth, 'image:', this.props.image.id);
     return (
       <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#e3f2fd', marginBottom: '20px'}} data-test="header-component">
         <Link to={"/"} className="navbar-brand" >WhoozIn</Link>
@@ -47,8 +48,8 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
-  return { auth };
+const mapStateToProps = state => {
+  return { image: state.image, auth: state.auth };
 }
 
 export default connect(mapStateToProps)(Header);

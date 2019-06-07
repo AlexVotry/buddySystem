@@ -4,6 +4,7 @@ import { hereIsolineUrl, maxIsolineRangeLookup } from './here';
 import { categories } from '../Forms/checkboxInfo';
 import './map.css';
 
+import { fetchUser } from '../../actions';
 import Sidebar from './Sidebar';
 import MapContainer from './MapContainer';
 import axios from 'axios';
@@ -30,7 +31,8 @@ class ListByLocation extends React.Component {
   };
   // }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    await this.props.fetchUser();
     if (this.props.auth) {
       this.setState({ center: [this.props.auth.lat, this.props.auth.long] });
       this.updateIsoline();
@@ -125,4 +127,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(ListByLocation);
+export default connect(mapStateToProps, { fetchUser })(ListByLocation);
